@@ -1,0 +1,6 @@
+git init
+git add install_memory_applet.sh
+git commit -m "Add install script"
+git remote add origin https://github.com/USERNAME/JavaCardTraining.git
+git push -u origin master
+

@@ -1,0 +1,18 @@
+# 1. تهيئة المستودع المحلي
+git init
+
+# 2. إضافة السكربت إلى المستودع
+git add install_memory_applet.sh
+
+# 3. عمل أول commit
+git commit -m "Add install script for JavaCard training"
+
+# 4. تحديد الفرع الرئيسي
+git branch -M main
+
+# 5. ربط المستودع المحلي بمستودع GitHub
+git remote add origin https://github.com/mabwy/JavaCardTraining.git
+
+# 6. رفع الملفات إلى GitHub
+git push -u origin main
+

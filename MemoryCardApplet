@@ -1,0 +1,11 @@
+package your.package.name; // غيّرها حسب اسم الباكيج
+
+public class RoseImageStorage {
+    public static final byte[] ROSE_IMAGE = {
+        (byte)0xA9, (byte)0x51, (byte)0xE3, (byte)0x15, (byte)0x04, (byte)0xE8, (byte)0x9F, (byte)0x0C,
+        (byte)0xC0, (byte)0xF8, (byte)0x0B, (byte)0x83, (byte)0x2F, (byte)0xDD, (byte)0x42, (byte)0x0E,
+        // ... باقي البايتات ...
+        (byte)0x42, (byte)0x60, (byte)0x82
+    };
+}
+
