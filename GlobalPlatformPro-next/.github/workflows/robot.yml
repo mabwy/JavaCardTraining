@@ -1,0 +1,56 @@
+on:
+  push:
+    branches:
+      - master
+      - next
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+name: Build robot
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        java: [ 11, 17, 21 ]
+    name: Java ${{ matrix.java }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # To make git describe give the intended output
+          fetch-tags: true
+      - name: Setup java
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: zulu
+          cache: maven
+      - run: ./mvnw --no-transfer-progress -P exe -B -U -T1C verify
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/v') && matrix.java == '11'
+        id: create_release
+        uses: softprops/action-gh-release@v2.2.1
+        with:
+          files: |
+            tool/target/gp.jar
+            tool/target/gp.exe
+          fail_on_unmatched_files: true
+          body: Release ${{ github.ref_name }}
+          prerelease: true # manually promoted
+      - name: Set SSH key
+        uses: webfactory/ssh-agent@v0.9.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+      - name: Add known host key
+        run: ssh-keyscan mvn.javacard.pro >> ~/.ssh/known_hosts
+      - name: Deploy package
+        if: (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/next' || github.ref == 'refs/heads/master') && matrix.java == '11'
+        run: ./mvnw --no-transfer-progress -B deploy

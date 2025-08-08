@@ -1,0 +1,9 @@
+mode 211
+enable_trace
+establish_context
+card_connect
+select -AID a000000003000000
+install -file MemoryCardApplet.cap -nvDataLimit 0xFF -codeLimit 0xFF
+card_disconnect
+release_context
+

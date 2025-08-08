@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<javacard>
+  <cap>
+    <packageName>com.memorycard.image</packageName>
+    <packageVersion>1.0</packageVersion>
+    <appletClass>ImageStorageApplet</appletClass>
+    <appletAID>0xA0:0x00:0x00:0x00:0x62:0x01:0x01</appletAID>
+    <outputDirectory>output</outputDirectory>
+    <sourceDirectory>.</sourceDirectory>
+    <classPath>.</classPath>
+  </cap>
+</javacard>
