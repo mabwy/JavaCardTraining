@@ -1,5 +1,14 @@
 #!/bin/bash
 
+echo "🔄 Preparing to push changes..."
+
+git add .
+git commit -m "تحديث تلقائي"
+git push
+
+echo "✅ Done!"
+x#!/bin/bash
+
 # إعداد المشروع
 git init
 git add .
